@@ -1,0 +1,104 @@
+<div class="grid grid-cols-1 grid-rows-2 gap-4 p-4">
+
+    <div class="border-2 border-blue-300 p-4 bg-blue-100">
+  
+      <div class="grid grid-cols-3 gap-4">
+        
+        <div>
+          <label class="block font-bold text-blue-800">Nombre:</label>
+          <input type="text" placeholder="Nombre de cliente" [(ngModel)]="cliente.nombre" class="border rounded p-1 w-full">
+        </div>
+  
+        <div>
+          <label class="block font-bold text-blue-800">Dirección:</label>
+          <input type="text" placeholder="Dirección" [(ngModel)]="cliente.direccion" class="border rounded p-1 w-full">
+        </div>
+  
+        <div>
+          <label class="block font-bold text-blue-800">Teléfono:</label>
+          <input type="text" placeholder="Teléfono" [(ngModel)]="cliente.telefono" class="border rounded p-1 w-full">
+        </div>
+  
+      </div>
+  
+      <div class="grid grid-cols-3 gap-4 mt-4">
+  
+        <div>
+          <p class="font-bold text-blue-800">Tamaño Pizza</p>
+          <label><input type="radio" name="size" value="chica" [(ngModel)]="pizzaSeleccionada.tamanio"> Chica $40</label><br>
+          <label><input type="radio" name="size" value="mediana" [(ngModel)]="pizzaSeleccionada.tamanio"> Mediana $80</label><br>
+          <label><input type="radio" name="size" value="grande" [(ngModel)]="pizzaSeleccionada.tamanio"> Grande $120</label>
+        </div>
+  
+        <div>
+          <p class="font-bold text-blue-800">Ingredientes</p>
+          <label><input type="checkbox" value="jamon" [(ngModel)]="pizzaSeleccionada.ingredientes.jamon"> Jamón $10</label><br>
+          <label><input type="checkbox" value="pina" [(ngModel)]="pizzaSeleccionada.ingredientes.pina"> Piña $10</label><br>
+          <label><input type="checkbox" value="champiñones" [(ngModel)]="pizzaSeleccionada.ingredientes.champinones"> Champiñones $10</label>
+        </div>
+  
+        <div>
+          <label class="block font-bold text-blue-800">Num. de Pizzas:</label>
+          <input type="number" [(ngModel)]="pizzaSeleccionada.cantidad" class="border rounded p-1 w-full mb-2">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="agregarPizza()">Agregar</button>
+        </div>
+  
+      </div>
+      
+    </div>
+  
+    <div class="grid grid-cols-2 gap-4">
+  
+      <div class="border-2 border-blue-300 p-4 bg-blue-50">
+  
+        <table class="w-full border-collapse border border-blue-300">
+  
+          <thead>
+  
+            <tr class="bg-blue-200">
+  
+              <th class="border border-blue-300 px-2 py-1">Tamaño</th>
+              <th class="border border-blue-300 px-2 py-1">Ingredientes</th>
+              <th class="border border-blue-300 px-2 py-1">Num. Pizzas</th>
+              <th class="border border-blue-300 px-2 py-1">SubTotal</th>
+  
+            </tr>
+  
+          </thead>
+  
+          <tbody>
+            <tr *ngFor="let pizza of pizzas">
+              <td class="border border-blue-300 px-2 py-1">{{ pizza.tamanio }}</td>
+              <td class="border border-blue-300 px-2 py-1">{{ pizza.ingredientes.join(', ') }}</td>
+              <td class="border border-blue-300 px-2 py-1">{{ pizza.cantidad }}</td>
+              <td class="border border-blue-300 px-2 py-1">${{ pizza.subtotal }}</td>
+              <td>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="quitarPizza(pizza)">Quitar</button>
+              </td>
+            </tr>
+          </tbody>
+  
+        </table>
+  
+        <div class="flex justify-between mt-4">
+  
+          <button class="bg-blue-700 text-white px-4 py-2 rounded" (click)="terminarPedido()">Terminar</button>
+  
+        </div>
+  
+      </div>
+  
+      <div class="border-2 border-blue-300 p-4 bg-blue-100">
+  
+        <p class="font-bold text-blue-800">Ventas del día:</p>
+        <div *ngFor="let venta of ventasDelDia">
+          <p class="text-blue-800">{{ venta.cliente }} ${{ venta.total }}</p>
+        </div>
+        <p class="font-bold text-blue-800">Ventas totales del día: ${{ ventasTotales }}</p>
+  
+      </div>
+  
+    </div>
+  
+  </div>
+  
